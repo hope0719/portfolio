@@ -143,4 +143,39 @@
   if (printBtn) {
     printBtn.addEventListener('click', function () { window.print(); });
   }
+
+  /* ---------- 7. 点击复制（微信号等） ---------- */
+  $$('.copyable').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      var text = el.getAttribute('data-copy') || el.textContent.trim();
+
+      function done() {
+        var old = el.textContent;
+        el.textContent = '已复制 ✓';
+        el.classList.add('copied');
+        setTimeout(function () {
+          el.textContent = old;
+          el.classList.remove('copied');
+        }, 1800);
+      }
+
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (err) { /* 忽略 */ }
+        document.body.removeChild(ta);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else {
+        fallback();
+      }
+    });
+  });
 })();

@@ -428,6 +428,9 @@ ul,ol{ margin:0; padding:0; list-style:none; }
 .contact-list span{ color:var(--text-dim); width:56px; flex:none; font-size:12px; }
 .contact-list a{ color:var(--text); transition:color .25s; }
 .contact-list a:hover{ color:var(--c1); }
+.contact-list .plain{ color:var(--text); width:auto; font-size:13px; }
+.copyable{ cursor:pointer; }
+.copyable.copied{ color:var(--c3) !important; }
 
 .contact-qr{ text-align:center; }
 .contact-qr img{
