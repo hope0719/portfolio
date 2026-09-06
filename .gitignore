@@ -1,0 +1,7 @@
+# 本地服务临时文件
+.server.pid
+.server.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
